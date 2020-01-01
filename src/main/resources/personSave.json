@@ -1,0 +1,8 @@
+url:-http://localhost:9000/person/save
+request:-{
+	"firstName":"akash",
+		"lastName":"gupta",
+			"age":"24",
+				"mobile":"6575467658",
+					"email":"akash@gmail.com"
+}
