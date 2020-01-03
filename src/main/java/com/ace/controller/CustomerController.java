@@ -25,7 +25,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	// save person
+	// save customer
 	@RequestMapping(value = "/save/{user_id}", method = RequestMethod.POST)
 	public ResponseEntity<Object> saveCustomer(@Validated @RequestBody CustomerRequest request,
 			@PathVariable("user_id") String userId) {
@@ -33,14 +33,14 @@ public class CustomerController {
 		return customerService.saveCustomer(request, Integer.parseInt(userId));
 	}
 
-	// get person list
+	// get customer list
 	@RequestMapping(value = "/persons", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCustomers() {
 
 		return customerService.getCustomers();
 	}
 
-	// update person mobile
+	// update customer mobile
 	@RequestMapping(value = "/update/mobile", method = RequestMethod.POST)
 	public ResponseEntity<Object> updateCustomerMobile(@RequestBody UpdateMobileRequest request) {
 
