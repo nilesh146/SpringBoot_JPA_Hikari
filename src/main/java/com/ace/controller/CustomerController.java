@@ -1,6 +1,11 @@
 package com.ace.controller;
 
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ace.Aspect.LogExecutionTime;
+import com.ace.Aspect.LogRequestAndResponseBody;
 import com.ace.Repository.CustomerRepository;
 import com.ace.dto.entity.Customer;
 import com.ace.dto.request.CustomerRequest;
 import com.ace.dto.request.UpdateMobileRequest;
 import com.ace.service.CustomerService;
+import com.ace.service.CustomerServiceImpl;
 import com.ace.wrapper.CustomerWrapper;
 
 @RequestMapping("person/")
@@ -25,12 +33,17 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
+	private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+	
 	// save customer
 	@RequestMapping(value = "/save/{user_id}", method = RequestMethod.POST)
+	@LogRequestAndResponseBody
+	@LogExecutionTime
 	public ResponseEntity<Object> saveCustomer(@Validated @RequestBody CustomerRequest request,
 			@PathVariable("user_id") String userId) {
-
-		return customerService.saveCustomer(request, Integer.parseInt(userId));
+	ResponseEntity<Object> response=customerService.saveCustomer(request, Integer.parseInt(userId));
+	return response;
+		
 	}
 
 	// get customer list
@@ -47,4 +60,5 @@ public class CustomerController {
 		return customerService.updateCustomerMobile(request);
 	}
 
+	  
 }

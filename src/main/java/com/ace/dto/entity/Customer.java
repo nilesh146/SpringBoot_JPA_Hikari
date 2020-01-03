@@ -129,4 +129,12 @@ public class Customer {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [custId=" + custId + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", middleName=" + middleName + ", age=" + age + ", mobile=" + mobile + ", email=" + email
+				+ ", createDate=" + createDate + ", expireDate=" + expireDate + "]";
+	}
+	
+
 }

@@ -1,6 +1,6 @@
 package com.ace.dto.request;
 
-public class UpdateMobileRequest {
+public class UpdateMobileRequest extends DomainRequest {
 
 	private int custId;
 	private String mobile;

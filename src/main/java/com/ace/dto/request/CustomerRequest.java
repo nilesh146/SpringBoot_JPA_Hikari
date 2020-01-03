@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 import com.ace.validators.Phone;
 
-public class CustomerRequest {
+public class CustomerRequest extends DomainRequest{
 
 	@NotNull(message = "firstName cannot be null")
 	@NotBlank
@@ -74,6 +74,12 @@ public class CustomerRequest {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerRequest [firstName=" + firstName + ", lastName=" + lastName + ", middleName=" + middleName
+				+ ", age=" + age + ", mobile=" + mobile + ", email=" + email + "]";
 	}
 
 }
