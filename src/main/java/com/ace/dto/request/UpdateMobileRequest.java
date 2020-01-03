@@ -2,15 +2,15 @@ package com.ace.dto.request;
 
 public class UpdateMobileRequest {
 
-	private int personId;
+	private int custId;
 	private String mobile;
 
-	public int getPersonId() {
-		return personId;
+	public int getCustId() {
+		return custId;
 	}
 
-	public void setPersonId(int personId) {
-		this.personId = personId;
+	public void setCustId(int custId) {
+		this.custId = custId;
 	}
 
 	public String getMobile() {

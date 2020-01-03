@@ -11,18 +11,18 @@ import javax.validation.Payload;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy=PhoneValidator.class)
+@Constraint(validatedBy = PhoneValidator.class)
 @Documented
 public @interface Phone {
-	
 
-	  String message() default "{phone.invalid}";
-	  
-	boolean  nullable() default true;
-	
-	boolean  empty() default true;
-	  Class<?>[] groups() default { };
+	String message() default "{phone.invalid}";
 
-	  Class<? extends Payload>[] payload() default { };
+	boolean nullable() default true;
+
+	boolean empty() default true;
+
+	Class<?>[] groups() default {};
+
+	Class<? extends Payload>[] payload() default {};
 
 }

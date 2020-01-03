@@ -11,17 +11,17 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.ace.dto.entity.Person;
+import com.ace.dto.entity.Customer;
 
 @Repository
-public interface PersonRepository  extends CrudRepository<Person, Long>   {
+public interface CustomerRepository  extends CrudRepository<Customer, Long>   {
 	//e.g of @Query for Retrive Operation
-	@Query(value="SELECT * FROM person",nativeQuery = true)
-	public List<Person> getAllPerson();
+	@Query(value="SELECT * FROM customer_details",nativeQuery = true)
+	public List<Customer> getAllPerson();
 	
 	//e.g of @NamedQuery update Operation
 	@Modifying
 	@Transactional
-	public void  updateMobile(  @Param("person_id")int  personId, @Param("mobile") String mobile);
+	public void  updateMobile(  @Param("cust_id")int  custId, @Param("mobile") String mobile);
 
 }

@@ -5,24 +5,36 @@ import javax.validation.constraints.NotNull;
 
 import com.ace.validators.Phone;
 
-public class PersonRequest {
+public class CustomerRequest {
 
-	@NotNull(message="firstName cannot be null")
+	@NotNull(message = "firstName cannot be null")
 	@NotBlank
 	private String firstName;
 
-	@NotNull(message="lastName cannot be null")
+	@NotNull(message = "lastName cannot be null")
 	@NotBlank
 	private String lastName;
 
+	@NotNull(message = "middleName cannot be null")
+	@NotBlank
+	private String middleName;
+
 	private int age;
 
-	@Phone(nullable=false,empty=false)
+	@Phone(nullable = false, empty = false)
 	private String mobile;
 
-	@NotNull(message="email cannot be null")
+	@NotNull(message = "email cannot be null")
 	@NotBlank
 	private String email;
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
 
 	public String getFirstName() {
 		return firstName;

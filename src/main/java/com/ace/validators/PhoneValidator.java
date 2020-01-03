@@ -20,15 +20,15 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
 
 	@Override
 	public boolean isValid(String phone, ConstraintValidatorContext context) {
-		if(phone==null && nullable==true) {
+		if (phone == null && nullable == true) {
 			return true;
 		}
-		if(phone!=null && StringUtils.isEmpty(phone) && empty==true) {
+		if (phone != null && StringUtils.isEmpty(phone) && empty == true) {
 			return true;
 		}
-		if (phone!=null && !StringUtils.isBlank(phone) && StringUtils.isNumeric(phone) && phone.length() == 10) {
+		if (phone != null && !StringUtils.isBlank(phone) && StringUtils.isNumeric(phone) && phone.length() == 10) {
 			return true;
-		}			
+		}
 		return false;
 	}
 
