@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Table(name = "customer_details")
 @NamedNativeQueries(value = { @NamedNativeQuery(
 		// name= entityname.queryName
-		name = "Customer.updateMobile", query = "update customer set mobile = :mobile  where person_id = :person_id") })
+		name = "Customer.updateMobile", query = "update customer_details set mobile = :mobile  where cust_id = :cust_id") })
 
 public class Customer {
 

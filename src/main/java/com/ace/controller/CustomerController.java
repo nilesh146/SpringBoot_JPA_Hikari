@@ -19,7 +19,7 @@ import com.ace.dto.request.CustomerRequest;
 import com.ace.dto.request.UpdateMobileRequest;
 import com.ace.service.CustomerService;
 
-@RequestMapping("person/")
+@RequestMapping("customer/")
 @RestController
 public class CustomerController {
 
@@ -40,7 +40,9 @@ public class CustomerController {
 	}
 
 	// get customer list
-	@RequestMapping(value = "/persons", method = RequestMethod.GET)
+	@RequestMapping(value = "/customers", method = RequestMethod.GET)
+	@LogRequestAndResponseBody
+	@LogExecutionTime
 	public ResponseEntity<Object> getCustomers() {
 
 		return customerService.getCustomers();
@@ -48,6 +50,8 @@ public class CustomerController {
 
 	// update customer mobile
 	@RequestMapping(value = "/update/mobile", method = RequestMethod.POST)
+	@LogRequestAndResponseBody
+	@LogExecutionTime
 	public ResponseEntity<Object> updateCustomerMobile(@RequestBody UpdateMobileRequest request) {
 
 		return customerService.updateCustomerMobile(request);

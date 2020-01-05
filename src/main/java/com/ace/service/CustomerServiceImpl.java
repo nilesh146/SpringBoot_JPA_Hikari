@@ -61,8 +61,17 @@ public class CustomerServiceImpl implements CustomerService {
 	// update mobile
 	@Override
 	public ResponseEntity<Object> updateCustomerMobile(UpdateMobileRequest request) {
-		customerRepository.updateMobile(request.getCustId(), request.getMobile());
+		
+		try {
+			customerRepository.updateMobile(request.getCustId(), request.getMobile());
+			logger.info("record updated successfully into dB"+ request.getCustId());
+		} catch (Exception ex) {
+			logger.error("error occur while updating a record into DB :-" ,ex);
+		
+			return new ResponseEntity<Object>("error occur while updating a record into DB", HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+		
 	}
 
 }
