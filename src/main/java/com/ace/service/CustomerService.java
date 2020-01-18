@@ -10,5 +10,6 @@ public interface CustomerService {
 
 	ResponseEntity<Object> saveCustomer( CustomerRequest request,int userId);
 	ResponseEntity<Object> getCustomers();
-	ResponseEntity<Object> updateCustomerMobile(UpdateMobileRequest request);
+	ResponseEntity<Object> updateCustomerMobile(UpdateMobileRequest request,int userId);
+	
 }

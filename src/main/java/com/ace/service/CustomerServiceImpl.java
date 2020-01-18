@@ -1,6 +1,8 @@
 package com.ace.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -41,6 +43,14 @@ public class CustomerServiceImpl implements CustomerService {
 		// handle the exception occure during inserting record into the Customer_Details
 		// Table.
 		try {
+			List<Customer> custDB=	customerRepository.findByuserId(userId);
+			for (Customer customer : custDB) {
+				if(customer!=null  &&customer.getUserId()==cust.getUserId() ) {
+					logger.info("record alrady present in dB"+ cust.getCustId());	
+					return new ResponseEntity<Object>(HttpStatus.OK);
+				}	
+			}
+			
 			customerRepository.save(cust);
 			logger.info("record inserted successfully into dB"+ cust.getCustId());
 		} catch (Exception ex) {
@@ -60,9 +70,20 @@ public class CustomerServiceImpl implements CustomerService {
 
 	// update mobile
 	@Override
-	public ResponseEntity<Object> updateCustomerMobile(UpdateMobileRequest request) {
+	public ResponseEntity<Object> updateCustomerMobile(UpdateMobileRequest request,int userId) {
 		
 		try {
+			List<Customer> custDB=	customerRepository.findByuserId(userId);
+			for (Customer customer : custDB) {
+				if(customer!=null  &&customer.getCustId()==request.getCustId()  ) {
+					customerRepository.makeRecordExpire(new Date(), 'U', 0);
+					return new ResponseEntity<Object>(HttpStatus.OK);
+				}	
+			}
+			
+			//customerRepository.save(cust);
+			//logger.info("record inserted successfully into dB"+ cust.getCustId());
+			customerRepository.findByuserId(userId);
 			customerRepository.updateMobile(request.getCustId(), request.getMobile());
 			logger.info("record updated successfully into dB"+ request.getCustId());
 		} catch (Exception ex) {

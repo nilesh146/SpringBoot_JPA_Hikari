@@ -20,7 +20,10 @@ import org.springframework.stereotype.Component;
 @Table(name = "customer_details")
 @NamedNativeQueries(value = { @NamedNativeQuery(
 		// name= entityname.queryName
-		name = "Customer.updateMobile", query = "update customer_details set mobile = :mobile  where cust_id = :cust_id") })
+		name = "Customer.updateMobile", query = "update customer_details set mobile = :mobile  where cust_id = :cust_id"),
+
+@NamedNativeQuery(name = "Customer.findByuserId" ,query = "select * from customer_details where user_id= :user_id  and expire_date  is Null", resultClass=Customer.class)
+,@NamedNativeQuery(name = "Customer.makeRecordExpire" ,query = "update customer_details set expire_date= :expire_date and expire_code= :expire_code and user_id= user_id where cust_id= :cust_id  and expire_date  is Null")})
 
 public class Customer {
 

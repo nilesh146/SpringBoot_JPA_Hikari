@@ -1,5 +1,6 @@
 package com.ace.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.NamedNativeQuery;
@@ -24,4 +25,9 @@ public interface CustomerRepository  extends CrudRepository<Customer, Long>   {
 	@Transactional
 	public void  updateMobile(  @Param("cust_id")int  custId, @Param("mobile") String mobile);
 
+	@Modifying
+	@Transactional
+	public void makeRecordExpire(@Param("expire_date") Date expireDate,@Param("expire_code") char expireCode,@Param("user_id")int  user_id);
+	
+	public List<Customer> findByuserId( @Param("user_id")int  userId);
 }

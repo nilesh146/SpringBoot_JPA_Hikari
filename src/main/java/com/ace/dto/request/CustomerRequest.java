@@ -21,7 +21,7 @@ public class CustomerRequest extends DomainRequest{
 
 	private int age;
 
-	@Phone(nullable = false, empty = false)
+	//@Phone(nullable = false, empty = false)
 	private String mobile;
 
 	@NotNull(message = "email cannot be null")

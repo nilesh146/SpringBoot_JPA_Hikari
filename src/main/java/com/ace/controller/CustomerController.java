@@ -1,5 +1,16 @@
 package com.ace.controller;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +29,13 @@ import com.ace.Aspect.LogRequestAndResponseBody;
 import com.ace.dto.request.CustomerRequest;
 import com.ace.dto.request.UpdateMobileRequest;
 import com.ace.service.CustomerService;
+import com.ace.validators.Phone;
+import com.ace.validators.PhoneValidator;
+
+import io.leangen.geantyref.TypeFactory;
+
+import java.lang.annotation.*;
+import java.lang.reflect.Method;
 
 @RequestMapping("customer/")
 @RestController
@@ -34,6 +52,7 @@ public class CustomerController {
 	@LogExecutionTime
 	public ResponseEntity<Object> saveCustomer(@Validated @RequestBody CustomerRequest request,
 			@PathVariable("user_id") String userId) {
+		
 		ResponseEntity<Object> response = customerService.saveCustomer(request, Integer.parseInt(userId));
 		return response;
 
@@ -49,12 +68,12 @@ public class CustomerController {
 	}
 
 	// update customer mobile
-	@RequestMapping(value = "/update/mobile", method = RequestMethod.POST)
+	@RequestMapping(value = "/update/mobile/{user_id}", method = RequestMethod.POST)
 	@LogRequestAndResponseBody
 	@LogExecutionTime
-	public ResponseEntity<Object> updateCustomerMobile(@RequestBody UpdateMobileRequest request) {
+	public ResponseEntity<Object> updateCustomerMobile(@RequestBody UpdateMobileRequest request,@PathVariable("user_id") String userId) {
 
-		return customerService.updateCustomerMobile(request);
+		return customerService.updateCustomerMobile(request,Integer.parseInt(userId));
 	}
-
+	 
 }
