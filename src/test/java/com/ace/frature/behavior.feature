@@ -6,6 +6,6 @@ Feature: enrole new user
     
     Examples:
     |firstName|lastName|middleName|age|mobile    |email         |httpStatus|
-    |dheraj    |patel  |arun    |21 |5654343432|arun@gmail.com|200       |
+    |karan    |sharma  |rahul    |20 |8787656543|karan@gmail.com|200       |
    
    
