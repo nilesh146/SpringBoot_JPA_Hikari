@@ -37,7 +37,7 @@ import io.leangen.geantyref.TypeFactory;
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
 
-@RequestMapping("customer/")
+@RequestMapping("/customer")
 @RestController
 public class CustomerController {
 
@@ -51,8 +51,7 @@ public class CustomerController {
 	@LogRequestAndResponseBody
 	@LogExecutionTime
 	public ResponseEntity<Object> saveCustomer(@Validated @RequestBody CustomerRequest request,
-			@PathVariable("user_id") String userId) {
-		
+			@PathVariable("user_id") String userId) {	
 		ResponseEntity<Object> response = customerService.saveCustomer(request, Integer.parseInt(userId));
 		return response;
 
