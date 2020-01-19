@@ -1,6 +1,7 @@
 package com.ace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,12 +21,14 @@ import com.ace.dto.request.CustomerRequest;
 import com.ace.service.CustomerServiceImpl;
 import com.ace.wrapper.CustomerWrapper;
 
+//junit runner 5 support by springRunner
 @RunWith(SpringRunner.class)
 public class CustomerServiceTest {
 
 	@InjectMocks
 	private CustomerServiceImpl customerServiceImpl;
 
+	//mocking
 	@Mock
 	private CustomerRepository customerRepository;
 
@@ -34,22 +37,39 @@ public class CustomerServiceTest {
 
 	@Test
 	public void saveCustomerTest() {
+		//stub
 		List<Customer> customers = new ArrayList<Customer>();
-		Mockito.when(customerWrapper.fromCustomerRequest(Mockito.any())).thenReturn(getCustomer());
+		//stubbing
+		Mockito.when(customerWrapper.fromCustomerRequest(Mockito.any(CustomerRequest.class))).thenReturn(getCustomer());
 		Mockito.when(customerRepository.findByuserId(Mockito.anyInt())).thenReturn(customers);
 		Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomer());
+		//calling actual method which we have to test
 		ResponseEntity<Object> response = customerServiceImpl.saveCustomer(getCustomerRequest(), 3);
+		//assertion
 		assertEquals(200, response.getStatusCode().value());
+		//verification
+		Mockito. verify(customerWrapper, times(1)).fromCustomerRequest(Mockito.any(CustomerRequest.class));
+		Mockito. verify(customerRepository, times(1)).findByuserId(Mockito.anyInt());
+		Mockito. verify(customerRepository, times(1)).save(Mockito.any(Customer.class));
+		
 	}
 	@Test
 	public void saveCustomerTest_customer_exist() {
+		//stub
 		List<Customer> customers = new ArrayList<Customer>();
 		customers.add(getCustomer());
+		//stubbing
 		Mockito.when(customerWrapper.fromCustomerRequest(Mockito.any())).thenReturn(getCustomer());
 		Mockito.when(customerRepository.findByuserId(Mockito.anyInt())).thenReturn(customers);
 		Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomer());
+		//calling actual method which we have to test
 		ResponseEntity<Object> response = customerServiceImpl.saveCustomer(getCustomerRequest(), 3);
+		//assertion
 		assertEquals(200, response.getStatusCode().value());
+		//verification
+		Mockito. verify(customerWrapper, times(1)).fromCustomerRequest(Mockito.any(CustomerRequest.class));
+		Mockito. verify(customerRepository, times(1)).findByuserId(Mockito.anyInt());
+		Mockito. verify(customerRepository, times(0)).save(Mockito.any(Customer.class));
 	}
 
 	public CustomerRequest getCustomerRequest() {
