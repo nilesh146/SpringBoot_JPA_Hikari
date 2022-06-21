@@ -19,7 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<msql-jdbc-version>8.0.16</msql-jdbc-version>
+		<msql-jdbc-version>8.0.28</msql-jdbc-version>
 	</properties>
 
 	<dependencies>
